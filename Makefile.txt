@@ -1,0 +1,28 @@
+TARGET = cwire
+
+SRC_DIR = .
+OBJ_DIR = obj
+
+SRCS = cwire.c
+
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+
+CC = gcc
+CFLAGS =
+LDFLAGS =
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf $(OBJ_DIR) $(TARGET)
+
+fclean: clean
+
+re: fclean all
